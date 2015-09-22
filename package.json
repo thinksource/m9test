@@ -1,0 +1,16 @@
+{
+  "name": "m9test",
+  "version": "0.0.1",
+  "author": "Sheng",
+  "license": "MIT",
+  "description":"nothing",
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "main":"./bin/www",
+
+  "dependencies": {
+    "express": "^4.2.0",
+    "body-parser": "^1.14.0"
+  }
+}
