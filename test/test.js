@@ -1,6 +1,5 @@
 var mocha=require('mocha');
 //var test = require('unit.js');
-var request=require('request');
 var fs=require("fs");
 var chai=require('chai');
 var chaiHttp=require('chai-http');
@@ -20,7 +19,7 @@ describe("/ POST json", function(){
         .send(example_req)
         .end((err, res)=>{
           res.should.have.status(200);
-          res.body.should.be.a('object');
+          expect(req).to.be.json;
           res.body.should.have.property('response');
           res.body.response.should.be.a('array');
           res.body.response.length.be.eql(7);
@@ -50,5 +49,51 @@ describe("/ POST json", function(){
         res.body.error.should.be.eql("Only post method accept for this service");
         done();
       })
-  })
+  });
+
+  it("Empty playload",()=>{
+    var empty_json={
+      "skip": 0,
+      "take": 10,
+      "totalRecords": 75
+    };
+    chai.request(server)
+    .post('/')
+    .send(empty_json)
+    .end((err, res)=>{
+      res.should.have.status(200);
+      expect(req).to.be.json;
+      res.body.should.have.property('response');
+      res.body.response.should.be.a('array');
+      res.body.response.length.be.eql(0);
+      res.body.should.be.eql(exmple_res);
+      done();
+    })
+  });
+  it("plain text", ()=>{
+    chai.request(server)
+        .post('/')
+        .send('simple test')
+        .end((err, res)=>{
+          res.should.have.status(400);
+          res.body.should.be.a('object');
+          res.body.should.have.property('error');
+          res.body.error.should.be.eql("Could not decode request: JSON parsing failed");
+          done();
+        })
+  });
+  it("Form request", ()=>{
+    chai.request(server)
+        .post('/')
+        .field('_method', 'put')
+        .field('password', '123')
+        .field('confirmPassword', '123')
+        .end((err, res)=>{
+          res.should.have.status(400);
+          res.body.should.be.a('object');
+          res.body.should.have.property('error');
+          res.body.error.should.be.eql("Could not decode request: JSON parsing failed");
+          done();
+        })
+  });
 })

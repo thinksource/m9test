@@ -1,35 +1,37 @@
 {
-  "name": "m9test",
-  "version": "0.0.1",
-  "author": "Sheng",
-  "license": "MIT",
-  "description": "nothing",
-  "scripts": {
-    "start": "node app",
-    "dev": "nodemon app.js",
-    "test":"mocha",
-    "//": "mocha && mocha test --require blanket --reporter html > coverage.html"
-  },
-  "main": "./bin/www",
-  "dependencies": {
-    "body-parser": "^1.15.2",
-    "express": "^4.14.0",
-    "mocha": "^3.2.0"
-  },
-  "devDependencies": {
-    "blanket": "latest",
-    "chai": "latest",
-    "chai-http":"^3.0.0",
-    "mocha": "^3.2.0",
-    "nodemon": "^1.11.0",
-    "unit.js": "^2.0.0"
-  },
-  "config": {
-    "blanket": {
-      "pattern": [
-        "app.js"
-      ],
-      "data-cover-never": "node_modules"
+    "name": "m9test",
+    "version": "0.0.1",
+    "author": "Sheng",
+    "license": "MIT",
+    "description": "nothing",
+    "scripts": {
+        "start": "node app",
+        "dev": "nodemon app.js",
+        "test": "mocha",
+        "coverage": "istanbul cover _mocha -- -R spec",
+        "//": "mocha && mocha test --require blanket --reporter html > coverage.html"
+    },
+    "main": "./bin/www",
+    "dependencies": {
+        "body-parser": "^1.15.2",
+        "express": "^4.14.0",
+        "mocha": "^3.2.0"
+    },
+    "devDependencies": {
+        "blanket": "latest",
+        "chai": "latest",
+        "chai-http": "^3.0.0",
+        "istanbul": "^0.4.5",
+        "mocha": "^3.2.0",
+        "nodemon": "^1.11.0",
+        "unit.js": "^2.0.0"
+    },
+    "config": {
+        "blanket": {
+            "pattern": [
+                "app.js"
+            ],
+            "data-cover-never": ["node_modules","bin"]
+        }
     }
-  }
 }
