@@ -19,12 +19,12 @@ var app = express();
 var errormessage={"error":"Could not decode request: JSON parsing failed"};
 var onlypostaccept={"error":"Only post method accept for this service"};
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({extended: true}));
 app.use (function (error, req, res, next){
     //Catch json error
     if (error instanceof SyntaxError) {
         console.error(error.stack);
-        res.status(400).send(onlypostaccept);
+        res.status(400).send(errormessage);
       } else {
         next();
       }
@@ -44,7 +44,7 @@ router.route('/')
           //console.log(headers);
           //  console.dir(req.body.payload);
         var payload=req.body.payload;
-        //console.log(payload);
+        console.log(payload);
         var re=[];
         for(var i=0;i<payload.length;i++){
           if(payload[i].hasOwnProperty("image")){
