@@ -7,8 +7,8 @@
   "scripts": {
     "start": "node app",
     "dev": "nodemon app.js",
-    "ntest":"mocha",
-    "test": "mocha && mocha test --require blanket --reporter html-cov > coverage.html"
+    "test":"mocha",
+    "//": "mocha && mocha test --require blanket --reporter html > coverage.html"
   },
   "main": "./bin/www",
   "dependencies": {
