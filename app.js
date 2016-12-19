@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 
 
 var app = express();
-
+app.set('port', process.env.PORT || 8000);
 //connect to our database
 //Ideally you will obtain DB details from a config file
 
@@ -23,10 +23,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use (function (error, req, res, next){
     //Catch json error
     if (error instanceof SyntaxError) {
-        console.error(error.stack);
+        //console.error(error.stack);
         res.status(400).send(errormessage);
-      } else {
-        next();
       }
 });
 var router=express.Router();
@@ -44,7 +42,7 @@ router.route('/')
           //console.log(headers);
           //  console.dir(req.body.payload);
         var payload=req.body.payload;
-        console.log(payload);
+        //console.log(payload);
         var re=[];
         for(var i=0;i<payload.length;i++){
           if(payload[i].hasOwnProperty("image")){
@@ -59,5 +57,8 @@ router.route('/')
       }
     });
 app.use('/', router);
+app.listen(app.get('port'), function() {
+  console.log('Express server listening on port ' + app.get('port'));
+});
 
 module.exports = app;
