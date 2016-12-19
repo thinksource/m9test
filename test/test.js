@@ -70,7 +70,7 @@ describe("/ POST json", function(){
       done();
     })
   });
-  it("plain text", ()=>{
+  it("plain text request test", ()=>{
     chai.request(server)
         .post('/')
         .send('simple test')
@@ -82,7 +82,7 @@ describe("/ POST json", function(){
           done();
         })
   });
-  it("Form request", ()=>{
+  it("Form request request test", ()=>{
     chai.request(server)
         .post('/')
         .field('_method', 'put')
