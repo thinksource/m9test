@@ -40,7 +40,7 @@ router.route('/')
         res.status(400).send(onlypostaccept);
     })
 
-.post(function(req, res) {
+    .post(function(req, res) {
             res.setHeader('Content-Type', 'application/json');
             var headers = req.headers;
             var re = [];
@@ -69,7 +69,7 @@ router.route('/')
             else{
                 res.status(400).send(errormessage);
             }
-            });
+      });
 app.use('/', router); app.listen(app.get('port'), function() {
     console.log('Express server listening on port ' + app.get('port'));
 });
