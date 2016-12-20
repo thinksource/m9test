@@ -76,7 +76,7 @@ describe("/ POST json", function(){
         .send('simple test')
         .end((err, res)=>{
           res.should.have.status(400);
-          res.body.should.be.a('object');
+          expect(req).to.be.json;
           res.body.should.have.property('error');
           res.body.error.should.be.eql("Could not decode request: JSON parsing failed");
           done();
@@ -90,7 +90,7 @@ describe("/ POST json", function(){
         .field('confirmPassword', '123')
         .end((err, res)=>{
           res.should.have.status(400);
-          res.body.should.be.a('object');
+          expect(req).to.be.json;
           res.body.should.have.property('error');
           res.body.error.should.be.eql("Could not decode request: JSON parsing failed");
           done();
