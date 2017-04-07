@@ -37,7 +37,7 @@ router.route('/')
     .get(function(req, res) {
         res.setHeader('Content-Type', 'application/json');
         //res.send(JSON.stringify({ "error": "only accept post request" }));
-        res.status(400).send(onlypostaccept);
+        res.status(400).send(errormessage);
     })
 
     .post(function(req, res) {
